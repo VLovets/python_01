@@ -1,7 +1,7 @@
 __author__ = 'vlovets'
 
 
-class Group:
+class GroupNew:
     def __init__(self, name, header, footer):
         self.name = name
         self.header = header
