@@ -59,7 +59,7 @@ class test_add_group(unittest.TestCase):
         self.return_to_groups_page(wd)
         self.log_out(wd)
 
-    def test_add_empty_group(self):
+    def add_empty_group(self):
         wd = self.wd
         self.open_home_page(wd)
         self.log_in(wd, username="admin", password="secret")
