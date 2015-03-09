@@ -1,14 +1,14 @@
 __author__ = 'vlovets'
 
 
-class SessionHelperAll:
+class SessionHelperC:
 
-    def __init__(self, app):
-        self.app = app
+    def __init__(self, appc):
+        self.appc = appc
 
     def log_in(self, username, password):
-        wd = self.app.wd
-        self.app.open_home_page()
+        wd = self.appc.wd
+        self.appc.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").click()
@@ -16,5 +16,5 @@ class SessionHelperAll:
         wd.find_element_by_css_selector("input[type=\"submit\"]").click()
 
     def log_out(self):
-        wd = self.app.wd
+        wd = self.appc.wd
         wd.find_element_by_link_text("Logout").click()
