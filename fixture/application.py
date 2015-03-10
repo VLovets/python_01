@@ -2,6 +2,7 @@ __author__ = 'vlovets'
 from selenium.webdriver.firefox.webdriver import WebDriver
 from fixture.session import SessionHelperAll
 from fixture.group import GroupHelper
+from fixture.contact import ContactHelper
 
 
 class Application:
@@ -11,6 +12,7 @@ class Application:
         self.wd.implicitly_wait(60)
         self.session = SessionHelperAll(self)
         self.group = GroupHelper(self)
+        self.contact = ContactHelper(self)
 
     def open_home_page(self):
         wd = self.wd
