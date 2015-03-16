@@ -19,6 +19,10 @@ class GroupHelper:
         self.change_field_value("group_header", group.header)
         self.change_field_value("group_footer", group.footer)
 
+    def opens_group_page(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("groups").click()
+
     def creation(self, group):
         wd = self.app.wd
         self.opens_group_page()
@@ -42,19 +46,6 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
 
-    def test_update_first_group(self, group):
-        wd = self.app.wd
-        self.opens_group_page()
-        #select first group
-        self.select_first_group()
-        # Init group edit
-        wd.find_element_by_name("edit").click()
-        # Fill group form
-        self.fill_group_form(group)
-        # Update creation
-        wd.find_element_by_name("update").click()
-        self.return_to_groups_page()
-
     def modify_first_group(self, new_group_date):
         wd = self.app.wd
         self.opens_group_page()
@@ -68,10 +59,6 @@ class GroupHelper:
         self.return_to_groups_page()
 
     def return_to_groups_page(self):
-        wd = self.app.wd
-        wd.find_element_by_link_text("groups").click()
-
-    def opens_group_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("groups").click()
 
