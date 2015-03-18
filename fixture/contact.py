@@ -8,11 +8,13 @@ class ContactHelper:
 
     def open_contact_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("add new").click()
+        if not (wd.current_url.endswith('edit.php') and (len(wd.find_elements_by_name('submit')) > 0)):
+            wd.find_element_by_link_text("add new").click()
 
     def open_home_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not ((len(wd.find_elements_by_id('maintable')) > 0) and (len(wd.find_elements_by_name('add')) > 0)):
+            wd.find_element_by_link_text("home").click()
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -44,7 +46,6 @@ class ContactHelper:
 
     def select_first_contact(self):
         wd = self.app.wd
-        # select first contact
         wd.find_element_by_name("selected[]").click()
 
     def create(self, contact):
@@ -68,7 +69,6 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
-        # Fill group form
         self.fill_contact_fields(contact)
         # submit creation
         wd.find_element_by_name("update").click()
