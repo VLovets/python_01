@@ -45,9 +45,12 @@ class ContactHelper:
         self.change_field_value("phone2", contact.phone2)
         self.change_field_value("notes", contact.notes)
 
-    def select_first_contact(self):
+    def select_first_contact(self, index):
+        self.select_contact_by_index(0)
+
+    def select_contact_by_index(self, index):
         wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def create(self, contact):
         wd = self.app.wd
@@ -57,21 +60,27 @@ class ContactHelper:
         wd.find_element_by_name("submit").click()
         self.contact_cache = None
 
-    def delete_first_contact(self):
+    def delete_first_contact(self, index):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         success = True
         wd = self.app.wd
         self.open_home_page()
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         #submit deletion
         wd.find_element_by_xpath("//div[@id='content']/form[@name='MainForm']/div[2]/input").click()
         #ok
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
-    def edit(self, contact):
+    def edit(self, index):
+        self.modify_some_contact(0)
+
+    def modify_some_contact(self, index, contact):
         wd = self.app.wd
         self.open_home_page()
-        wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
+        wd.find_elements_by_css_selector("img[alt=\"Edit\"]")[index].click()
         self.fill_contact_fields(contact)
         # submit creation
         wd.find_element_by_name("update").click()
@@ -94,4 +103,4 @@ class ContactHelper:
                 textf = element.find_elements_by_css_selector('td')[2].text
                 id = element.find_element_by_name('selected[]').get_attribute('value')
                 self.contact_cache.append(Contact(firstname=textf, lastname=textl, id=id))
-        return self.contact_cache
+        return list(self.contact_cache)
