@@ -110,8 +110,7 @@ class ContactHelper:
                 self.contact_cache.append(Contact(firstname=firstname, lastname=lastname,
                                                   address=address, all_mails=all_mails,
                                                   all_phones_from_homepge=all_phones, id=id))
-                                                  #home=all_phones[0], mobile=all_phones[1],
-                                                  #work=all_phones[2], phone2=all_phones[3]))
+
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
@@ -156,4 +155,15 @@ class ContactHelper:
         return Contact(home=home, mobile=mobile,
                        work=work, phone2=phone2)
 
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+        wd.find_element_by_xpath("//div[@id='content']/form[@name='MainForm']/div[2]/input").click()
 
+    def delete_contact_by_id(self, id):
+        success = True
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(id)
+        wd.switch_to_alert().accept()
+        self.contact_cache = None
