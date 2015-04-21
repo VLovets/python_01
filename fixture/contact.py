@@ -136,7 +136,6 @@ class ContactHelper:
         home = wd.find_element_by_name('home').get_attribute('value')
         mobile = wd.find_element_by_name('mobile').get_attribute('value')
         work = wd.find_element_by_name('work').get_attribute('value')
-        #fax = wd.find_element_by_name('fax').get_attribute('value')
         phone2 = wd.find_element_by_name('phone2').get_attribute('value')
         return Contact(firstname=firstname, lastname=lastname, address=address,
                        id=id, email=email,
@@ -160,6 +159,10 @@ class ContactHelper:
         wd.find_element_by_css_selector("input[value='%s']" % id).click()
         wd.find_element_by_xpath("//div[@id='content']/form[@name='MainForm']/div[2]/input").click()
 
+    def select_contact_by_id_for_group(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
     def delete_contact_by_id(self, id):
         success = True
         wd = self.app.wd
@@ -167,3 +170,21 @@ class ContactHelper:
         self.select_contact_by_id(id)
         wd.switch_to_alert().accept()
         self.contact_cache = None
+
+    def click_add_to_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("add").click()
+
+    def select_second_group(self):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_xpath("//div[@class='right']/select//option[3]").click()
+
+    def display_contact_in_group(self):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_xpath("//form[@id='right']/select//option[5]").click()
+
+    def remove_from_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("remove").click()

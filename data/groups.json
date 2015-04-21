@@ -1,6 +1,13 @@
 [
   {
     "py/object": "model.group.GroupNew",
+    "footer": "fU:",
+    "name": "nQ",
+    "header": "hS",
+    "id": null
+  },
+  {
+    "py/object": "model.group.GroupNew",
     "footer": "",
     "name": "",
     "header": "",
