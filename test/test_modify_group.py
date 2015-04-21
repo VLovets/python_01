@@ -1,7 +1,7 @@
 __author__ = 'vlovets'
 from model.group import GroupNew
 from random import randrange
-import random
+
 
 def test_modify_group_name(app, db, check_ui):
     if len(db.get_group_list()) == 0:
