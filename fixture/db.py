@@ -29,12 +29,14 @@ class DbFixture:
         list = []
         cursor = self.connection.cursor()
         try:
-            cursor.execute("select id, firstname, lastname from addressbook where deprecated='0000-00-00 00:00:00'")
+            cursor.execute("select id, firstname, middlename, lastname, home, mobile, work, phone2, email, email2, email3, address from addressbook where deprecated='0000-00-00 00:00:00'")
             for row in cursor:
-                (id, firstname, lastname) = row
-                list.append(Contact(id=str(id), firstname=firstname, lastname=lastname))
+                (id, firstname, middlename, lastname, home, mobile, work, phone2, email, email2, email3, address) = row
+                list.append(Contact(id=str(id), firstname=firstname, middlename=middlename, lastname=lastname, home=home,
+                                    mobile=mobile, work=work, phone2=phone2,
+                                    email=email, email2=email2, email3=email3, address=address))
         finally:
-            cursor.close()
+            cursor.close
         return list
 
     def get_contacts_in_group(self):
