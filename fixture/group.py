@@ -1,6 +1,7 @@
 __author__ = 'vlovets'
 
 from model.group import GroupNew
+from selenium.webdriver.support.ui import Select
 
 class GroupHelper:
 
@@ -105,3 +106,10 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
         self.group_cache = None
+
+    def get_groups_from_main_page(self, group_name):
+        wd = self.app.wd
+        #self.opens_group_page()
+        element = wd.find_element_by_name('to_group')
+        select = Select(element)
+        select.select_by_visible_text(group_name)

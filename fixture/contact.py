@@ -2,6 +2,7 @@ __author__ = 'vlovets'
 
 from model.contact import Contact
 import re
+from selenium.webdriver.support.ui import Select
 
 class ContactHelper:
 
@@ -180,10 +181,13 @@ class ContactHelper:
         self.open_home_page()
         wd.find_element_by_xpath("//div[@class='right']/select//option[3]").click()
 
-    def display_contact_in_group(self):
+    def display_contact_in_group(self, group_name):
         wd = self.app.wd
         self.open_home_page()
-        wd.find_element_by_xpath("//form[@id='right']/select//option[5]").click()
+        #wd.find_element_by_xpath("//form[@id='right']/select//option[5]").click()
+        element = wd.find_element_by_name('group')
+        select = Select(element)
+        select.select_by_visible_text(group_name)
 
     def remove_from_group(self):
         wd = self.app.wd
